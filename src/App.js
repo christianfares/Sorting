@@ -35,7 +35,7 @@ function App() {
 	return (
 		<Sketch 
 			setup={setup}
-			draw={bs.draw}
+			draw={qs.draw}
 		>
 		</Sketch>
 	);

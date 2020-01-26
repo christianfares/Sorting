@@ -42,6 +42,17 @@ export default class QuickSort {
 
 	quickSort = async (array, low, high) => {
 		if (low < high) {
+			let mid = Math.floor((low + high)/2)
+			if (array[mid] < array[low]) {
+				array = this.swap(array, low, mid)
+			}
+			if (array[high] < array[low]) {
+				array = this.swap(array, low, high)
+			}
+			if (array[mid] < array[high]) {
+				array = this.swap(array, high, mid)
+			}
+
 			let part = await this.partition(array, low, high)
 			await this.quickSort(array, low, part-1)
 			await this.quickSort(array, part+1, high)
