@@ -22,25 +22,27 @@ export default class BubbleSort {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
-	bubbleSort = async () => {
-		let swapped = true
-		for (let i = 0; i < this.array.length; i++) {
-			swapped = false
-			for (let j = 0; j < this.array.length; j++) {
-				this.comp1 = j
-				this.comp2 = j + 1
-				await this.sleep(10);
-				if (this.array[j] > this.array[j + 1]) {
-					this.array = this.swap(this.array, j, j+1)
-					swapped = true
-					await this.sleep(10)
+	sort = async () => {
+		if (!this.sorted) {
+			let swapped = true
+			for (let i = 0; i < this.array.length; i++) {
+				swapped = false
+				for (let j = 0; j < this.array.length; j++) {
+					this.comp1 = j
+					this.comp2 = j + 1
+					await this.sleep(10);
+					if (this.array[j] > this.array[j + 1]) {
+						this.array = this.swap(this.array, j, j+1)
+						swapped = true
+						await this.sleep(10)
+					}
+				}
+				if (!swapped) {
+					break;
 				}
 			}
-			if (!swapped) {
-				break;
-			}
+			this.sorted = true;
 		}
-		this.sorted = true;
 	}
 
 	draw = (p5) => {

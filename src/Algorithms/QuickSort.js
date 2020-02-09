@@ -40,6 +40,12 @@ export default class QuickSort {
 		return i
 	}
 
+	sort = () => {
+		if (!this.sorted) {
+			this.quickSort(this.array, 0, this.array.length - 1)
+		}
+	}
+	
 	quickSort = async (array, low, high) => {
 		if (low < high) {
 			let mid = Math.floor((low + high)/2)
@@ -58,7 +64,7 @@ export default class QuickSort {
 			await this.quickSort(array, part+1, high)
 		}
 		let sorted = true
-		for (let i = 0; i < array.length-1; i++ ) {
+		for (let i = 0; i < array.length-1; i++) {
 			if (array[i] > array[i+1]) {
 				sorted = false
 				break
