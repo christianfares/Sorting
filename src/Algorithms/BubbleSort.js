@@ -1,15 +1,23 @@
 
-
 export default class BubbleSort {
 	constructor (width, height, array) {
 		this.height = height
 		this.width = width
 		this.array = array.slice()
+		this.sorted = false;
+		this.stopped = true;
+		this.comp1 = 0
+		this.comp2 = 1
+		this.sort()
 	}
 
-	comp1 = 0
-	comp2 = 1
-	sorted = false;
+	start = () => {
+		this.stopped = false
+	}
+
+	stop = () => {
+		this.stopped = true
+	}
 
 	swap = (array, i, j) => {
 		let temp = array[i]
@@ -22,12 +30,19 @@ export default class BubbleSort {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
+	waitTilStart = async () => {
+		while (this.stopped) {
+			await this.sleep(100)
+		}
+	}
+
 	sort = async () => {
 		if (!this.sorted) {
 			let swapped = true
 			for (let i = 0; i < this.array.length; i++) {
 				swapped = false
 				for (let j = 0; j < this.array.length; j++) {
+					await this.waitTilStart()
 					this.comp1 = j
 					this.comp2 = j + 1
 					await this.sleep(10);

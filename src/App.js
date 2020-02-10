@@ -53,7 +53,7 @@ function App() {
 					</Typography>
 				</Toolbar>
 			</AppBar>
-			<Grid container justify="center" styles={{flexGrow: 1}}>
+			<Grid container justify="center" style={{flexGrow: 1}}>
 				<Grid item>
 					<Grid container>
 						<Grid item>
@@ -67,20 +67,28 @@ function App() {
 							</Sketch>
 						</Grid>
 					</Grid>
-					<Grid container>
+					<Grid container justify="center">
 						<Grid item>
 							<Typography
 								variant="h6"
 							>
 								Select a sorting algorithm and hit start to sort!
 							</Typography>
+						</Grid>
+					</Grid>
+					<Grid container justify="center" spacing={1}>
+						<Grid item>
 							<Button variant="outlined" onClick={setBubbleSort}>BubbleSort</Button>
+						</Grid>
+						<Grid item>
 							<Button variant="outlined" onClick={setQuickSort}>QuickSort</Button>
 						</Grid>
 					</Grid>
+					<br/>
 					<Grid container justify="center">
 						<Grid item>
-							<Button variant="outlined" onClick={algorithm.sort}>Start</Button>
+							<Button variant="outlined" color="primary" onClick={algorithm.start}>Start</Button>
+							<Button variant="outlined" color="primary" onClick={algorithm.stop}>Stop</Button>
 						</Grid>
 					</Grid>
 				</Grid>

@@ -4,12 +4,21 @@ export default class QuickSort {
 		this.height = height
 		this.width = width
 		this.array = array.slice()
+		this.comp1 = 0
+		this.comp2 = 1
+		this.pivot = -1;
+		this.sorted = false
+		this.stopped = true
+		this.sort();
 	}
 
-	comp1 = 0
-	comp2 = 1
-	pivot = -1;
-	sorted = false
+	start = () => {
+		this.stopped = false
+	}
+
+	stop = () => {
+		this.stopped = true
+	}
 
 	swap = (array, i, j) => {
 		let temp = array[i]
@@ -22,16 +31,23 @@ export default class QuickSort {
 		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
+	waitTilStart = async () => {
+		while (this.stopped) {
+			await this.sleep(100)
+		}
+	}
+
 	partition = async (array, low, high) => {
 		this.pivot = high;
 		let i = low;
 		for (let j = low; j < high; j++) {
 			this.comp1 = i
 			this.comp2 = j
-			await this.sleep(50);
+			await this.sleep(10);
+			await this.waitTilStart();
 			if (array[j] < array[this.pivot]) {
 				array = this.swap(array, i, j);
-				await this.sleep(50);
+				await this.sleep(10);
 				i++;
 			}
 		}
