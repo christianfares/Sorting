@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Sketch from "react-p5";
 import BubbleSort from "./Algorithms/BubbleSort";
 import QuickSort from "./Algorithms/QuickSort";
+import InsertionSort from './Algorithms/InsertionSort';
+import SelectionSort from './Algorithms/SelectionSort';
+
 import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import './App.css';
 
 function shuffle(a) {
@@ -36,33 +36,43 @@ function App() {
 		setAlgorithm(new BubbleSort(width, height, shuffle(array)));
 	}
 
+	const setInsertionSort = () => {
+		setAlgorithm(new InsertionSort(width, height, shuffle(array)));
+	}
+
+	const setSelectionSort = () => {
+		setAlgorithm(new SelectionSort(width, height, shuffle(array)));
+	}
+
 	const setup = (p5, canvasParentRef) => {
 		p5.createCanvas(width + 1, height).parent(canvasParentRef);
 	}
 	
 	return (
 		<div>
-			<AppBar>
-				<Toolbar
-					variant='dense'
-				>
-					<Typography
-						variant='h5'
-					>
-						Sorting Algorithms
-					</Typography>
-				</Toolbar>
-			</AppBar>
-			<Grid container justify="center" style={{flexGrow: 1}}>
+			
+			<Grid container justify="center">
 				<Grid item>
+					<Grid container justify="center">
+						<Grid item>
+							<Typography
+								variant='h4'
+								style={{
+									alignSelf:"center",
+									position:"relative",
+									alignContent:"center"
+								}}
+							>
+								Sorting Algorithms
+							</Typography>
+							<br/>
+						</Grid>
+					</Grid>
 					<Grid container>
 						<Grid item>
 							<Sketch 
 								setup={setup}
 								draw={algorithm.draw}
-								style={{
-									marginTop:"45px"
-								}}
 							>
 							</Sketch>
 						</Grid>
@@ -76,12 +86,18 @@ function App() {
 							</Typography>
 						</Grid>
 					</Grid>
-					<Grid container justify="center" spacing={1}>
-						<Grid item>
-							<Button variant="outlined" onClick={setBubbleSort}>BubbleSort</Button>
+					<Grid container justify="space-around" alignContent="space-around" spacing={1} style={{flexGrow: 1}} >
+						<Grid item align="center" xs={5} md="auto">
+							<Button variant="outlined" onClick={setBubbleSort}>Bubble Sort</Button>
 						</Grid>
-						<Grid item>
-							<Button variant="outlined" onClick={setQuickSort}>QuickSort</Button>
+						<Grid item align="center" xs={5} md="auto">
+							<Button variant="outlined" onClick={setInsertionSort}>Insertion Sort</Button>
+						</Grid>
+						<Grid item align="center" xs={5} md="auto">
+							<Button variant="outlined" onClick={setQuickSort}>Quick Sort</Button>
+						</Grid>
+						<Grid item align="center" xs={5} md="auto">
+							<Button variant="outlined" onClick={setSelectionSort}>Selection Sort</Button>
 						</Grid>
 					</Grid>
 					<br/>
